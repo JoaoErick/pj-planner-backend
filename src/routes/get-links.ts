@@ -1,10 +1,8 @@
 import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
-import nodemailer from 'nodemailer';
 import { z } from "zod";
-import { dayjs } from "../lib/dayjs";
-import { getMailClient } from "../lib/mail";
 import { prisma } from "../lib/prisma";
+import { ClientError } from "../errors/client-error";
 
 export async function getLinks(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().get('/trips/:tripId/links', {
@@ -24,7 +22,7 @@ export async function getLinks(app: FastifyInstance) {
     })
 
     if (!trip) {
-      throw new Error('Trip not found.')
+      throw new ClientError('Trip not found.')
     }
 
     return { links: trip.links }
