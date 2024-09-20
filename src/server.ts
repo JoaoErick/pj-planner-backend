@@ -18,6 +18,7 @@ import { getParticipant } from './routes/get-participant';
 import { errorHandler } from './error-handler';
 import { env } from './env';
 import { deleteParticipant } from './routes/delete-participant';
+import { deleteActivity } from './routes/delete-activity';
 
 const app = fastify()
 
@@ -60,6 +61,7 @@ app.register(updateTrip)
 app.register(getTripDetails)
 app.register(getParticipant)
 app.register(deleteParticipant)
+app.register(deleteActivity)
 
 app.listen({ port: env.PORT }).then(() => {
   console.log('Server running!')

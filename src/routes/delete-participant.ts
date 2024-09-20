@@ -19,17 +19,17 @@ export async function deleteParticipant(app: FastifyInstance) {
     });
 
     if (!participant) {
-      throw new ClientError('Participant not found.');
+      throw new ClientError('Participant not found.')
     }
 
     if (participant.is_owner) {
-      throw new ClientError('Trip owner cannot be removed.');
+      throw new ClientError('Trip owner cannot be removed.')
     }
 
     await prisma.participant.delete({
       where: { id: participantId }
     });
 
-    return { message: 'Participant successfully removed.' };
+    return { message: 'Participant successfully removed.' }
   });
 }
